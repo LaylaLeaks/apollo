@@ -1,0 +1,17 @@
+{
+  "name": "apollo",
+  "version": "0.1",
+  "description": "Apollo by LaylaLeaks",
+  "main": "apollo.bat",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "aes": "node src/aeskeys/aesKeys.js",
+    "cos_all": "node src/cosmetics/cosmetics_all.js"
+  },
+  "keywords": [],
+  "author": "LaylaLeaks",
+  "license": "ISC",
+  "dependencies": {
+    "fnapicom": "^1.1.0"
+  }
+}
