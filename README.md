@@ -15,3 +15,6 @@ Fast Fortnite-Api Bot
 
 #### Support me
 Follow me on Twitter: https://twitter.com/Layla_Leaks
+
+
+#### the next update is a revamp with <a href='https://dotnet.microsoft.com/en-us/download/dotnet/8.0/runtime'>.NET 8<a/>
