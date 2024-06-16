@@ -1,0 +1,15 @@
+﻿<Window x:Class="Apollo.ApolloInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apollo"
+        mc:Ignorable="d"
+        Title="Apollo" Height="450" Width="500">
+    <DockPanel Background="#FF4C4C4C">
+        <Grid>
+            <TextBlock HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Height="393" Width="459" FontSize="20" Foreground="White"><Run Text="Apollo 1.0"/><LineBreak/><Run Text="Made with &lt;3 by @Layla_Leaks"/><LineBreak/><Run/><LineBreak/><Run Text="Description:"/><LineBreak/><Run Text="Apollo is an Fast API program its mean"/><LineBreak/><Run Text="that you can get fast stuff e.g. the new "/><LineBreak/><Run Text="cosmetics from the latest update."/><LineBreak/><Run/><LineBreak/><Run Language="de-de" Text="API:"/><LineBreak/><Run Language="de-de" Text="Apollo use an Unofficial API."/><LineBreak/><Run Language="de-de"/><LineBreak/><Run Language="de-de"/><LineBreak/><Run Language="de-de"/><LineBreak/><Run Language="de-de" Text="Not affiliated with Epic Games"/></TextBlock>
+
+        </Grid>
+    </DockPanel>
+</Window>
