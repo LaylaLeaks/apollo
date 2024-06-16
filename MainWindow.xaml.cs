@@ -265,7 +265,7 @@ namespace Apollo
                     JObject json = JObject.Parse(responseBody);
                     JArray items = (JArray)json["data"]["items"];
 
-                    string newCosmeticsFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "all_cosmetics");
+                    string newCosmeticsFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "new_cosmetics");
                     if (!Directory.Exists(newCosmeticsFolder))
                     {
                         Directory.CreateDirectory(newCosmeticsFolder);
