@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Apollo"
         mc:Ignorable="d"
-        Title="Apollo Beta" Height="600" Width="1000">
+        Title="Apollo" Height="600" Width="1000">
     <Grid Background="#FF4C4C4C">
         <TextBlock HorizontalAlignment="Center" Margin="0,144,0,0" TextWrapping="Wrap" Text="Welcome to Apollo, this is a Beta Version, Created by @Layla_Leaks" VerticalAlignment="Top" Height="94" Width="464" FontSize="30" Foreground="White"/>
 
