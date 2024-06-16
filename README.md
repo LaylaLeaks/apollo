@@ -5,7 +5,7 @@ Apollo used an [Unofficial API](https://fortnite-api.com)
 
 #### Install
 
-You can get here the latest [version](https://github.com/LaylaLeaks/apollo/releases/tag/1.0)
+You can get here the latest [version](https://github.com/LaylaLeaks/apollo/releases)
 
 #### Support
 
