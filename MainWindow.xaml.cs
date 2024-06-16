@@ -124,7 +124,7 @@ namespace Apollo
             };
 
             client.Initialize();
-            UpdatePresence("Apollo testing");
+            UpdatePresence("Search stuff");
         }
 
         private void UpdatePresence(string details)
@@ -161,7 +161,7 @@ namespace Apollo
         // help (dropdown)
         private void Help_Discord_Click(object sender, EventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://discord.gg/d4spXjQ6VN") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://discord.gg/3AUtgD8sWy") { UseShellExecute = true });
         }
 
         // mappings
