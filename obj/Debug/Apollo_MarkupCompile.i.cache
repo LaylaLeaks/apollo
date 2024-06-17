@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\layla\Desktop\Code\apollo\obj\Debug\
+C:\Users\layla\Desktop\Code\Apollo\obj\Debug\
 Apollo
 none
 false
 DEBUG;TRACE
-C:\Users\layla\Desktop\Code\apollo\App.xaml
-4550574318
+C:\Users\layla\Desktop\Code\Apollo\App.xaml
+51728472293
 
-9243078929
-16-1693606093
-ApolloInfo.xaml;BetaWindow.xaml;MainWindow.xaml;UsernamePromptWindow.xaml;
+10-1396170926
+16842022899
+ApolloInfo.xaml;BetaWindow.xaml;MainWindow.xaml;SettingsWindow.xaml;UsernamePromptWindow.xaml;
 
-True
+False
 

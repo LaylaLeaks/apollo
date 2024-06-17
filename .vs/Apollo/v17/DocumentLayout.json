@@ -3,32 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\layla\\Desktop\\Code\\apollo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|c:\\users\\layla\\desktop\\code\\apollo\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|C:\\Users\\layla\\Desktop\\Code\\apollo\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|C:\\Users\\layla\\Desktop\\Code\\apollo\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|C:\\Users\\layla\\Desktop\\Code\\apollo\\betawindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|solutionrelative:betawindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|c:\\users\\layla\\desktop\\code\\apollo\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|C:\\Users\\layla\\Desktop\\Code\\apollo\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|solutionrelative:app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|c:\\users\\layla\\desktop\\code\\apollo\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|c:\\users\\layla\\desktop\\code\\apollo\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|c:\\users\\layla\\desktop\\code\\apollo\\betawindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|solutionrelative:betawindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|c:\\users\\layla\\desktop\\code\\apollo\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{2D285648-718E-42C5-A363-7C863E6992F2}|Apollo.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,57 +22,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BetaWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\layla\\Desktop\\Code\\apollo\\BetaWindow.xaml.cs",
-              "RelativeDocumentMoniker": "BetaWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\layla\\Desktop\\Code\\apollo\\BetaWindow.xaml.cs",
-              "RelativeToolTip": "BetaWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T16:41:51.819Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\layla\\Desktop\\Code\\apollo\\App.xaml.cs",
-              "RelativeDocumentMoniker": "App.xaml.cs",
-              "ToolTip": "C:\\Users\\layla\\Desktop\\Code\\apollo\\App.xaml.cs",
-              "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T16:41:51.77Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\layla\\Desktop\\Code\\apollo\\App.xaml",
-              "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\Users\\layla\\Desktop\\Code\\apollo\\App.xaml",
-              "RelativeToolTip": "App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-16T16:41:51.633Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Users\\layla\\Desktop\\Code\\apollo\\App.config",
               "RelativeDocumentMoniker": "App.config",
               "ToolTip": "C:\\Users\\layla\\Desktop\\Code\\apollo\\App.config",
               "RelativeToolTip": "App.config",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2024-06-16T16:41:51.581Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\layla\\Desktop\\Code\\apollo\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\layla\\Desktop\\Code\\apollo\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-17T11:39:05.639Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -99,33 +59,9 @@
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\layla\\Desktop\\Code\\apollo\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AQIAABwBAAAAAAAAAAAqwDgBAAAJAAAA",
+              "ViewState": "AQIAACYAAAAAAAAAAAA1wDkAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T12:17:21.4Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\layla\\Desktop\\Code\\apollo\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\layla\\Desktop\\Code\\apollo\\MainWindow.xaml",
-              "RelativeToolTip": "MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-16T12:17:09.843Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BetaWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\layla\\Desktop\\Code\\apollo\\BetaWindow.xaml",
-              "RelativeDocumentMoniker": "BetaWindow.xaml",
-              "ToolTip": "C:\\Users\\layla\\Desktop\\Code\\apollo\\BetaWindow.xaml",
-              "RelativeToolTip": "BetaWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-16T12:16:55.564Z",
+              "WhenOpened": "2024-06-17T11:46:50.538Z",
               "EditorCaption": ""
             }
           ]

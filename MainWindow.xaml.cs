@@ -21,6 +21,7 @@ using DiscordRPC;
 using DiscordRPC.Logging;
 using Newtonsoft.Json.Linq;
 using System.Linq.Expressions;
+using System.Configuration;
 
 namespace Apollo
 {
@@ -28,6 +29,8 @@ namespace Apollo
     {
         private DiscordRpcClient client;
         private Timer timer;
+
+        private bool ChangelogShow;
 
         private int elapsedTimeSeconds;
         private int consoleLineCount = 0;
@@ -39,6 +42,38 @@ namespace Apollo
             InitializeDiscordRPC();
             InitializeUserName();
             CheckAndCreateFolder();
+
+            ChangelogShow = Convert.ToBoolean(ConfigurationManager.AppSettings["ChangelogShow"]);
+
+            if (!ChangelogShow)
+            {
+                DisplayChangelog();
+                UpdateAppConfigChangeLogShown(true);
+            }
+        }
+
+        private void UpdateAppConfigChangeLogShown(bool value)
+        {
+            System.Configuration.Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings["ChangelogShow"].Value = value.ToString();
+            configuration.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        private void DisplayChangelog()
+        {
+            string[] changelog = new string[]
+            {
+                "",
+                "Path notes:",
+                "+ Shop Sections",
+                "",
+            };
+            
+            foreach (var entry in changelog)
+            {
+                DisplayInConsole(entry);
+            }
         }
 
         // Create and Check for folder exists
@@ -48,6 +83,7 @@ namespace Apollo
             string newCosmeticsFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "new_cosmetics");
             string allCosmeticsFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "all_cosmetics");
             string othersFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "others");
+            string shopSections = System.IO.Path.Combine(Environment.CurrentDirectory, "shopSections");
 
             if (!Directory.Exists(mappingsFolder))
             {
@@ -71,6 +107,12 @@ namespace Apollo
             {
                 Directory.CreateDirectory(othersFolder);
                 DisplayInConsole("Folder for another stuff Created.");
+            }
+
+            if (!Directory.Exists(shopSections))
+            {
+                Directory.CreateDirectory(shopSections);
+                DisplayInConsole("Folder for shop sections Created.");
             }
         }
 
@@ -423,10 +465,58 @@ namespace Apollo
             }
         }
 
+        // shop sections
+        private async void shopSections_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://fortnitecontent-website-prod07.ol.epicgames.com/content/api/pages/fortnite-game/mp-item-shop");
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    JObject json = JObject.Parse(responseBody);
+                    JArray sections = (JArray)json["shopData"]["sections"];
+
+                    List<string> sectionList = new List<string>();
+                    foreach (var section in sections)
+                    {
+                        string sectionId = section["sectionID"].ToString();
+                        string sectionName = section["displayName"].ToString();
+                        sectionList.Add($"[{sectionId}] - {sectionName}");
+                    }
+
+                    string fileName = $"{DateTime.Now:yyyy.MM.dd}.txt";
+                    string filePath = System.IO.Path.Combine(Environment.CurrentDirectory, "shopSections", fileName);
+                    using (StreamWriter writer = new StreamWriter(filePath))
+                    {
+                        foreach (string line in sectionList)
+                        {
+                            await writer.WriteLineAsync(line);
+                        }
+                    }
+                    DisplayInConsole($"Shop section saved to {fileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayInConsole($"Error fetching shop sections: {ex.Message}");
+            }
+        }
+
+        // apollo button
         private void Help_Apollo_Click(object sender, EventArgs e)
         {
             ApolloInfo apollo = new ApolloInfo();
             apollo.Show();
+        }
+
+        // settings button
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Show();
         }
 
         // Display Console
@@ -439,6 +529,7 @@ namespace Apollo
                 consoleTextBox.ScrollToEnd();
             });
         }
+
         private class MappingInfo
         {
             public string url { get; set; }
