@@ -25,3 +25,5 @@ C:\Users\layla\Desktop\Code\apollo\obj\Release\Apollo.csproj.CoreCompileInputs.c
 C:\Users\layla\Desktop\Code\apollo\obj\Release\Apollo.csproj.Up2Date
 C:\Users\layla\Desktop\Code\apollo\obj\Release\Apollo.exe
 C:\Users\layla\Desktop\Code\apollo\obj\Release\Apollo.pdb
+C:\Users\layla\Desktop\Code\Apollo\obj\Release\SettingsWindow.g.cs
+C:\Users\layla\Desktop\Code\Apollo\obj\Release\SettingsWindow.baml

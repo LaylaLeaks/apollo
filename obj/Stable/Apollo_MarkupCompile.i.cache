@@ -4,7 +4,7 @@
 winexe
 C#
 .cs
-C:\Users\layla\Desktop\Code\Apollo\obj\Release\
+C:\Users\layla\Desktop\Code\Apollo\obj\Stable\
 Apollo
 none
 false
@@ -12,9 +12,9 @@ TRACE
 C:\Users\layla\Desktop\Code\Apollo\App.xaml
 51728472293
 
-9977018249
+101619885022
 16842022899
 ApolloInfo.xaml;BetaWindow.xaml;MainWindow.xaml;SettingsWindow.xaml;UsernamePromptWindow.xaml;
 
-False
+True
 
