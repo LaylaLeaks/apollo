@@ -1,0 +1,15 @@
+﻿<Window x:Class="Apollo.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apollo"
+        mc:Ignorable="d"
+        Title="Apollo" Height="350" Width="600">
+    <DockPanel Background="#FF4C4C4C">
+        <Grid>
+            <TextBlock HorizontalAlignment="Center" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Center"><Run Language="de-de" Text="Coming Soon" Foreground="White"/></TextBlock>
+
+        </Grid>
+    </DockPanel>
+</Window>
