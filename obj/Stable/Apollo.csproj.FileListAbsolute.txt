@@ -27,3 +27,16 @@ C:\Users\layla\Desktop\Code\Apollo\obj\Stable\Apollo.csproj.CoreCompileInputs.ca
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\Apollo.csproj.Up2Date
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\Apollo.exe
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\Apollo.pdb
+C:\Users\layla\Desktop\Code\Apollo\obj\Stable\MapWindow.g.cs
+C:\Users\layla\Desktop\Code\Apollo\obj\Stable\MapWindow.baml
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\DotNetEnv.dll
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Microsoft.Extensions.Configuration.dll
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Microsoft.Extensions.Primitives.dll
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Sprache.dll
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Microsoft.Extensions.Configuration.xml
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Microsoft.Extensions.Primitives.xml
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Sprache.xml
+C:\Users\layla\Desktop\Code\Apollo\bin\Stable\System.Runtime.CompilerServices.Unsafe.xml

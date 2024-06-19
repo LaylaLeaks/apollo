@@ -1,0 +1,24 @@
+﻿<Window x:Class="Apollo.MapWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apollo"
+        mc:Ignorable="d"
+        Title="Apollo" Height="450" Width="400">
+    <DockPanel Background="#FF4C4C4C">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Image x:Name="mapImage" Grid.Row="1" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="400" Margin="0,0,0,10"/>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="170,20,0,0">
+                <Button Content="Switch" Click="SwitchMap_Click" Width="60" BorderBrush="Black" Margin="0,0,0,30"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

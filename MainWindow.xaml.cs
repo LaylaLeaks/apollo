@@ -15,10 +15,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
 using System.Net.Http;
 using Apollo.Properties;
 using DiscordRPC;
 using DiscordRPC.Logging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq.Expressions;
 using System.Configuration;
@@ -29,6 +31,7 @@ namespace Apollo
     {
         private DiscordRpcClient client;
         private Timer timer;
+        private CancellationTokenSource allCosmeticsCancellationTokenSource;
 
         private bool ChangelogShow;
 
@@ -52,6 +55,7 @@ namespace Apollo
             }
         }
 
+        // Changelog
         private void UpdateAppConfigChangeLogShown(bool value)
         {
             System.Configuration.Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -64,12 +68,14 @@ namespace Apollo
         {
             string[] changelog = new string[]
             {
-                "",
-                "Path notes:",
-                "+ Shop Sections",
-                "",
+            "",
+            "Path notes:",
+            "+ Map Preview (Beta)",
+            "+ You can now cancel the download for all cosmetics",
+            "+ Settings coming soon",
+            "",
             };
-            
+
             foreach (var entry in changelog)
             {
                 DisplayInConsole(entry);
@@ -193,12 +199,6 @@ namespace Apollo
         }
 
         // Buttons event
-
-        // settings
-        private void Settings_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("[PH]", "Settings", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
 
         // help (dropdown)
         private void Help_Discord_Click(object sender, EventArgs e)
@@ -357,6 +357,16 @@ namespace Apollo
         // all cosemtics
         private async void AllCosmetics_Click(object sender, RoutedEventArgs e)
         {
+            if (allCosmeticsCancellationTokenSource != null && !allCosmeticsCancellationTokenSource.Token.IsCancellationRequested)
+            {
+                allCosmeticsCancellationTokenSource.Cancel();
+                allCosmeticsCancellationTokenSource = null;
+                DisplayInConsole("Download cancelled.");
+                return;
+            }
+
+            allCosmeticsCancellationTokenSource = new CancellationTokenSource();
+
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -364,23 +374,24 @@ namespace Apollo
                     HttpResponseMessage response = await client.GetAsync("https://fortnite-api.com/v2/cosmetics/br");
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
-
                     JObject json = JObject.Parse(responseBody);
                     JArray items = (JArray)json["data"];
-
                     string allCosmeticsFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "all_cosmetics");
                     if (!Directory.Exists(allCosmeticsFolder))
                     {
                         Directory.CreateDirectory(allCosmeticsFolder);
                         DisplayInConsole("Folder for all Cosmetics Created.");
                     }
-
                     foreach (JToken item in items)
                     {
+                        if (allCosmeticsCancellationTokenSource == null || allCosmeticsCancellationTokenSource.Token.IsCancellationRequested)
+                        {
+                            throw new OperationCanceledException();
+                        }
+
                         string itemName = (string)item["name"];
                         string itemId = (string)item["id"];
                         string iconUrl = (string)item["images"]["icon"];
-
                         if (string.IsNullOrEmpty(iconUrl))
                         {
                             iconUrl = "https://laylaleaks.netlify.app/src/img/Placeholder.png";
@@ -390,28 +401,36 @@ namespace Apollo
                             Uri baseUri = new Uri("https://fortnite-api.com");
                             iconUrl = new Uri(baseUri, iconUrl).AbsoluteUri;
                         }
-
-                        string fileName = itemId + ".png";
-
+                        string fileName = $"{itemName}_{itemId}.png";
                         string filePath = System.IO.Path.Combine(allCosmeticsFolder, fileName);
-                        using (var iconResponse = await client.GetAsync(iconUrl))
+                        using (HttpClient httpClient = new HttpClient())
                         {
-                            iconResponse.EnsureSuccessStatusCode();
-                            using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                            using (HttpResponseMessage imageResponse = await httpClient.GetAsync(iconUrl))
                             {
-                                await iconResponse.Content.CopyToAsync(fileStream);
+                                using (Stream imageStream = await imageResponse.Content.ReadAsStreamAsync())
+                                {
+                                    using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                                    {
+                                        await imageStream.CopyToAsync(fileStream);
+                                    }
+                                }
                             }
                         }
-
-                        DisplayInConsole($"Downloaded icon for: {itemName} (ID: {itemId})");
+                        DisplayInConsole($"Downloaded: {fileName}");
                     }
-
-                    DisplayInConsole("All cosmetic icons downloaded successfully.");
                 }
+            }
+            catch (OperationCanceledException)
+            {
+                DisplayInConsole("Download cancelled.");
             }
             catch (Exception ex)
             {
-                DisplayInConsole($"Error downloading cosmetic icons: {ex.Message}");
+                DisplayInConsole($"Error searching all cosmetics: {ex.Message}");
+            }
+            finally
+            {
+                allCosmeticsCancellationTokenSource = null;
             }
         }
 
@@ -422,6 +441,9 @@ namespace Apollo
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    MapWindow mapWindow = new MapWindow();
+                    mapWindow.Show();
+
                     HttpResponseMessage response = await client.GetAsync("https://fortnite-api.com/v1/map");
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
