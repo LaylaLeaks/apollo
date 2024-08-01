@@ -9,7 +9,6 @@ C:\Users\layla\Desktop\Code\Apollo\bin\Stable\Newtonsoft.Json.xml
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\Apollo.csproj.AssemblyReference.cache
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\UsernamePromptWindow.baml
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\ApolloInfo.g.cs
-C:\Users\layla\Desktop\Code\Apollo\obj\Stable\BetaWindow.g.cs
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\MainWindow.g.cs
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\SettingsWindow.g.cs
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\UsernamePromptWindow.g.cs
@@ -17,7 +16,6 @@ C:\Users\layla\Desktop\Code\Apollo\obj\Stable\App.g.cs
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\Apollo_MarkupCompile.cache
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\Apollo_MarkupCompile.lref
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\ApolloInfo.baml
-C:\Users\layla\Desktop\Code\Apollo\obj\Stable\BetaWindow.baml
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\MainWindow.baml
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\SettingsWindow.baml
 C:\Users\layla\Desktop\Code\Apollo\obj\Stable\Apollo.g.resources

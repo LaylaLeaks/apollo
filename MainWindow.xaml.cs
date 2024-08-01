@@ -24,6 +24,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq.Expressions;
 using System.Configuration;
+using System.Text.RegularExpressions;
+using System.Net.Http.Headers;
 
 namespace Apollo
 {
@@ -70,9 +72,8 @@ namespace Apollo
             {
             "",
             "Path notes:",
-            "+ Map Preview (Beta)",
-            "+ You can now cancel the download for all cosmetics",
-            "+ Settings coming soon",
+            "",
+            "+ All battle pass icons downloading via others",
             "",
             };
 
@@ -90,6 +91,7 @@ namespace Apollo
             string allCosmeticsFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "all_cosmetics");
             string othersFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "others");
             string shopSections = System.IO.Path.Combine(Environment.CurrentDirectory, "shopSections");
+            string battlePassImages = System.IO.Path.Combine(Environment.CurrentDirectory, "Battle Pass");
 
             if (!Directory.Exists(mappingsFolder))
             {
@@ -119,6 +121,12 @@ namespace Apollo
             {
                 Directory.CreateDirectory(shopSections);
                 DisplayInConsole("Folder for shop sections Created.");
+            }
+
+            if (!Directory.Exists(battlePassImages))
+            {
+                Directory.CreateDirectory(battlePassImages);
+                DisplayInConsole("Folder for Battle Pass images Created.");
             }
         }
 
@@ -472,6 +480,63 @@ namespace Apollo
             {
                 DisplayInConsole($"Error downloading map: {ex.Message}");
             }
+        }
+
+        private async void Others_BP_Images_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://fnapi.netlify.app/api/v1/battlePass");
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    string battlePassImages = System.IO.Path.Combine(Environment.CurrentDirectory, "Battle Pass");
+                    if (!Directory.Exists(battlePassImages))
+                    {
+                        Directory.CreateDirectory(battlePassImages);
+                        DisplayInConsole("Folder for new battle pass icons created.");
+                    }
+
+                    var urls = ExtractImageUrls(responseBody);
+
+                    foreach (var url in urls)
+                    {
+                        try
+                        {
+                            var fileName = System.IO.Path.GetFileName(new Uri(url).LocalPath);
+                            var filePath = System.IO.Path.Combine(battlePassImages, fileName);
+
+                            byte[] imageBytes = await client.GetByteArrayAsync(url);
+                            File.WriteAllBytes(filePath, imageBytes);
+
+                            DisplayInConsole($"Image saved: {fileName}");
+                        }
+                        catch (Exception ex)
+                        {
+                            DisplayInConsole($"Error saving image {url}: {ex.Message}");
+                        }
+                    }
+
+                    DisplayInConsole("All battle pass icons downloaded successfully.");
+                }
+            }
+            catch (Exception ex)
+            {
+                DisplayInConsole($"Error downloading battle pass icons: {ex.Message}");
+            }
+        }
+
+        private IEnumerable<string> ExtractImageUrls(string content)
+        {
+            var imageUrls = new List<string>();
+            var regex = new Regex(@"https?:\/\/.*?\.(png|jpg)", RegexOptions.IgnoreCase);
+            foreach (Match match in regex.Matches(content))
+            {
+                imageUrls.Add(match.Value);
+            }
+            return imageUrls;
         }
 
         private async Task DownloadImageAsync(string imageUrl, string filePath)
