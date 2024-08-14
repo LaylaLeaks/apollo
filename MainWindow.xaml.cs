@@ -488,7 +488,7 @@ namespace Apollo
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync("https://fnapi.netlify.app/api/v1/battlePass");
+                    HttpResponseMessage response = await client.GetAsync("https://fnapi2.netlify.app/api/v1/battlePass");
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
 
