@@ -73,7 +73,9 @@ namespace Apollo
             "",
             "Path notes:",
             "",
-            "+ All battle pass icons downloading via others",
+            "+ Updating shop section",
+            "",
+            "- All battle pass icons downloading via others",
             "",
             };
 
@@ -482,63 +484,6 @@ namespace Apollo
             }
         }
 
-        private async void Others_BP_Images_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync("https://fnapi2.netlify.app/api/v1/battlePass");
-                    response.EnsureSuccessStatusCode();
-                    string responseBody = await response.Content.ReadAsStringAsync();
-
-                    string battlePassImages = System.IO.Path.Combine(Environment.CurrentDirectory, "Battle Pass");
-                    if (!Directory.Exists(battlePassImages))
-                    {
-                        Directory.CreateDirectory(battlePassImages);
-                        DisplayInConsole("Folder for new battle pass icons created.");
-                    }
-
-                    var urls = ExtractImageUrls(responseBody);
-
-                    foreach (var url in urls)
-                    {
-                        try
-                        {
-                            var fileName = System.IO.Path.GetFileName(new Uri(url).LocalPath);
-                            var filePath = System.IO.Path.Combine(battlePassImages, fileName);
-
-                            byte[] imageBytes = await client.GetByteArrayAsync(url);
-                            File.WriteAllBytes(filePath, imageBytes);
-
-                            DisplayInConsole($"Image saved: {fileName}");
-                        }
-                        catch (Exception ex)
-                        {
-                            DisplayInConsole($"Error saving image {url}: {ex.Message}");
-                        }
-                    }
-
-                    DisplayInConsole("All battle pass icons downloaded successfully.");
-                }
-            }
-            catch (Exception ex)
-            {
-                DisplayInConsole($"Error downloading battle pass icons: {ex.Message}");
-            }
-        }
-
-        private IEnumerable<string> ExtractImageUrls(string content)
-        {
-            var imageUrls = new List<string>();
-            var regex = new Regex(@"https?:\/\/.*?\.(png|jpg)", RegexOptions.IgnoreCase);
-            foreach (Match match in regex.Matches(content))
-            {
-                imageUrls.Add(match.Value);
-            }
-            return imageUrls;
-        }
-
         private async Task DownloadImageAsync(string imageUrl, string filePath)
         {
             using (HttpClient client = new HttpClient())
@@ -567,11 +512,71 @@ namespace Apollo
                     JArray sections = (JArray)json["shopData"]["sections"];
 
                     List<string> sectionList = new List<string>();
+
                     foreach (var section in sections)
                     {
                         string sectionId = section["sectionID"].ToString();
                         string sectionName = section["displayName"].ToString();
-                        sectionList.Add($"[{sectionId}] - {sectionName}");
+
+                        if (sectionId.IndexOf("Test", StringComparison.OrdinalIgnoreCase) == -1 &&
+                            sectionName.IndexOf("Test", StringComparison.OrdinalIgnoreCase) == -1 &&
+                            sectionId.IndexOf("JamTracks", StringComparison.OrdinalIgnoreCase) == -1 &&
+                            sectionName.IndexOf("JamTracks", StringComparison.OrdinalIgnoreCase) == -1)
+                        {
+                            List<string> dates = new List<string>();  
+
+                            // Extrahiere die 'stackRanks' von 'metadata'
+                            JObject metadata = (JObject)section["metadata"];
+                            if (metadata != null)
+                            {
+                                JArray metaStackRanks = (JArray)metadata["stackRanks"];
+                                if (metaStackRanks != null && metaStackRanks.Count > 0)
+                                {
+                                    foreach (JObject stackRank in metaStackRanks)
+                                    {
+                                        string startDate = stackRank["startDate"]?.ToString();
+                                        if (!string.IsNullOrEmpty(startDate))
+                                        {
+                                            dates.Add(startDate);
+                                        }
+                                    }
+                                }
+
+                                JArray offerGroups = (JArray)metadata["offerGroups"];
+                                if (offerGroups != null)
+                                {
+                                    foreach (JObject offerGroup in offerGroups)
+                                    {
+                                        JArray offerStackRanks = (JArray)offerGroup["stackRanks"];
+                                        if (offerStackRanks != null && offerStackRanks.Count > 0)
+                                        {
+                                            foreach (JObject offerStackRank in offerStackRanks)
+                                            {
+                                                string startDate = offerStackRank["startDate"]?.ToString();
+                                                if (!string.IsNullOrEmpty(startDate))
+                                                {
+                                                    dates.Add(startDate);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            sectionList.Add($"[{sectionId}] - {sectionName}");
+
+                            foreach (var date in dates)
+                            {
+                                sectionList.Add($"[{date}]");
+                            }
+
+                            if (dates.Count == 0)
+                            {
+                                sectionList.Add("[N/A]");
+                            }
+
+                            sectionList.Add("");
+                        }
                     }
 
                     string fileName = $"{DateTime.Now:yyyy.MM.dd}.txt";
@@ -583,6 +588,7 @@ namespace Apollo
                             await writer.WriteLineAsync(line);
                         }
                     }
+
                     DisplayInConsole($"Shop section saved to {fileName}");
                 }
             }
@@ -591,6 +597,8 @@ namespace Apollo
                 DisplayInConsole($"Error fetching shop sections: {ex.Message}");
             }
         }
+
+
 
         // apollo button
         private void Help_Apollo_Click(object sender, EventArgs e)
