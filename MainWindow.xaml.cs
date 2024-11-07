@@ -73,9 +73,7 @@ namespace Apollo
             "",
             "Path notes:",
             "",
-            "+ Updating shop section",
-            "",
-            "- All battle pass icons downloading via others",
+            "+ Updating new cosmetics",
             "",
             };
 
@@ -123,12 +121,6 @@ namespace Apollo
             {
                 Directory.CreateDirectory(shopSections);
                 DisplayInConsole("Folder for shop sections Created.");
-            }
-
-            if (!Directory.Exists(battlePassImages))
-            {
-                Directory.CreateDirectory(battlePassImages);
-                DisplayInConsole("Folder for Battle Pass images Created.");
             }
         }
 
@@ -303,56 +295,90 @@ namespace Apollo
             }
         }
 
-        // new cosemtics
+        // new cosmetics
         private async void NewCosmetics_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync("https://fortnite-api.com/v2/cosmetics/br/new");
+                    HttpResponseMessage response = await client.GetAsync("https://fortnite-api.com/v2/cosmetics/new");
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
 
                     JObject json = JObject.Parse(responseBody);
-                    JArray items = (JArray)json["data"]["items"];
+                    JObject items = (JObject)json["data"]["items"];
 
-                    string newCosmeticsFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "new_cosmetics");
-                    if (!Directory.Exists(newCosmeticsFolder))
+                    Dictionary<string, string> categoryFolders = new Dictionary<string, string>
                     {
-                        Directory.CreateDirectory(newCosmeticsFolder);
-                        DisplayInConsole("Folder for new Cosmetics Created.");
+                        { "br", "br" },
+                        { "instruments", "festival" },
+                        { "cars", "rocket_racing" },
+                        { "lego", "lego" },
+                        { "beans", "fall_guys" }
+                    };
+
+                    string baseFolder = System.IO.Path.Combine(Environment.CurrentDirectory, "new_cosmetics");
+
+                    if (!Directory.Exists(baseFolder))
+                    {
+                        Directory.CreateDirectory(baseFolder);
+                        DisplayInConsole("Main folder for new Cosmetics created.");
                     }
 
-                    foreach (JToken item in items)
+                    foreach (var category in categoryFolders)
                     {
-                        string itemName = (string)item["name"];
-                        string itemId = (string)item["id"];
-                        string iconUrl = (string)item["images"]["icon"];
+                        string categoryName = category.Key;
+                        string folderName = category.Value;
 
-                        if (string.IsNullOrEmpty(iconUrl))
+                        string categoryFolderPath = System.IO.Path.Combine(baseFolder, folderName);
+                        if (!Directory.Exists(categoryFolderPath))
                         {
-                            iconUrl = "https://laylaleaks.netlify.app/src/img/Placeholder.png";
-                        }
-                        else if (!Uri.IsWellFormedUriString(iconUrl, UriKind.Absolute))
-                        {
-                            Uri baseUri = new Uri("https://fortnite-api.com");
-                            iconUrl = new Uri(baseUri, iconUrl).AbsoluteUri;
+                            Directory.CreateDirectory(categoryFolderPath);
+                            DisplayInConsole($"Folder created for category: {folderName}");
                         }
 
-                        string fileName = itemId + ".png";
-
-                        string filePath = System.IO.Path.Combine(newCosmeticsFolder, fileName);
-                        using (var iconResponse = await client.GetAsync(iconUrl))
+                        if (items[categoryName] is JArray categoryItems)
                         {
-                            iconResponse.EnsureSuccessStatusCode();
-                            using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                            foreach (JToken item in categoryItems)
                             {
-                                await iconResponse.Content.CopyToAsync(fileStream);
+                                string itemName = (string)item["name"];
+                                string itemId = (string)item["id"];
+
+                                string iconUrl = (string)item["images"]["icon"];
+                                if (string.IsNullOrEmpty(iconUrl) || !Uri.IsWellFormedUriString(iconUrl, UriKind.Absolute))
+                                {
+                                    iconUrl = (string)item["images"]["smallIcon"];
+                                }
+                                if (string.IsNullOrEmpty(iconUrl) || !Uri.IsWellFormedUriString(iconUrl, UriKind.Absolute))
+                                {
+                                    iconUrl = (string)item["images"]["small"];
+                                }
+
+                                if (string.IsNullOrEmpty(iconUrl) || !Uri.IsWellFormedUriString(iconUrl, UriKind.Absolute))
+                                {
+                                    iconUrl = "https://i.imgur.com/a7T092l.png";
+                                }
+
+                                string fileName = $"{itemId}.png";
+                                string filePath = System.IO.Path.Combine(categoryFolderPath, fileName);
+
+                                using (var iconResponse = await client.GetAsync(iconUrl))
+                                {
+                                    iconResponse.EnsureSuccessStatusCode();
+                                    using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                                    {
+                                        await iconResponse.Content.CopyToAsync(fileStream);
+                                    }
+                                }
+
+                                DisplayInConsole($"Downloaded icon for: {itemName} (ID: {itemId}) in category: {folderName}");
                             }
                         }
-
-                        DisplayInConsole($"Downloaded icon for: {itemName} (ID: {itemId})");
+                        else
+                        {
+                            DisplayInConsole($"No items found for category: {categoryName}");
+                        }
                     }
 
                     DisplayInConsole("All cosmetic icons downloaded successfully.");
@@ -363,6 +389,7 @@ namespace Apollo
                 DisplayInConsole($"Error downloading cosmetic icons: {ex.Message}");
             }
         }
+
 
         // all cosemtics
         private async void AllCosmetics_Click(object sender, RoutedEventArgs e)
@@ -404,7 +431,7 @@ namespace Apollo
                         string iconUrl = (string)item["images"]["icon"];
                         if (string.IsNullOrEmpty(iconUrl))
                         {
-                            iconUrl = "https://laylaleaks.netlify.app/src/img/Placeholder.png";
+                            iconUrl = "https://i.imgur.com/a7T092l.png";
                         }
                         else if (!Uri.IsWellFormedUriString(iconUrl, UriKind.Absolute))
                         {
@@ -597,8 +624,6 @@ namespace Apollo
                 DisplayInConsole($"Error fetching shop sections: {ex.Message}");
             }
         }
-
-
 
         // apollo button
         private void Help_Apollo_Click(object sender, EventArgs e)

@@ -22,5 +22,10 @@ namespace Apollo
         {
             InitializeComponent();
         }
+
+        // COMING SOON
+        // LANG SELECT
+        // OUTPUT CHANGE
+        // NAME CHANGE
     }
 }
