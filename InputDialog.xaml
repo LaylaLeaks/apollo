@@ -1,0 +1,14 @@
+﻿<Window x:Class="Apollo.InputDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Apollo Auth-Code" Height="150" Width="300" Background="#FF4C4C4C">
+    <StackPanel Margin="10">
+        <TextBlock Text="Please enter your authorization code:" Margin="0,0,0,10" Foreground="White"/>
+        <TextBox x:Name="InputTextBox" Margin="0,0,0,10"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" Width="75" Margin="5" Click="OkButton_Click"/>
+            <Button Content="Cancel" Width="75" Margin="5" Click="CancelButton_Click"/>
+            <Button Content="Code-Site" Width="75" Margin="5" Click="CodeButton_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

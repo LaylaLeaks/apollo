@@ -26,6 +26,7 @@ using System.Linq.Expressions;
 using System.Configuration;
 using System.Text.RegularExpressions;
 using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace Apollo
 {
@@ -34,6 +35,9 @@ namespace Apollo
         private DiscordRpcClient client;
         private Timer timer;
         private CancellationTokenSource allCosmeticsCancellationTokenSource;
+        private static readonly HttpClient httpClient = new HttpClient();
+        private string accessToken = null;
+        private string authorizationCode;
 
         private bool ChangelogShow;
 
@@ -73,8 +77,15 @@ namespace Apollo
             "",
             "Path notes:",
             "",
-            "+ Updating new cosmetics",
+            "+ Mnemonics",
             "",
+            "UPCOMING STUFF:",
+            "",
+            "• Battle Pass rewards",
+            "• Crew History",
+            "• Augments",
+            "• Vehicle and Weapon Stats",
+            ""
             };
 
             foreach (var entry in changelog)
@@ -185,7 +196,7 @@ namespace Apollo
                 Assets = new Assets()
                 {
                     LargeImageKey = "apollo_logo",
-                    LargeImageText = "Apollo Beta"
+                    LargeImageText = "Apollo 1.4"
                 },
                 Timestamps = new Timestamps()
                 {
@@ -552,7 +563,6 @@ namespace Apollo
                         {
                             List<string> dates = new List<string>();  
 
-                            // Extrahiere die 'stackRanks' von 'metadata'
                             JObject metadata = (JObject)section["metadata"];
                             if (metadata != null)
                             {
@@ -648,6 +658,37 @@ namespace Apollo
                 consoleTextBox.AppendText($"{consoleLineCount}. {message}\n");
                 consoleTextBox.ScrollToEnd();
             });
+        }
+
+        private void mnemonic_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(authorizationCode))
+            {
+                DisplayInConsole("Authorization code is required to open Mnemonic Search.");
+                return;
+            }
+
+            MnemonicSearchWindow mnemonicWindow = new MnemonicSearchWindow(authorizationCode);
+            mnemonicWindow.Show();
+        }
+
+        private async void Others_AuthCode_Click(object sender, RoutedEventArgs e)
+        {
+            InputDialog inputDialog = new InputDialog();
+            if (inputDialog.ShowDialog() == true)
+            {
+                authorizationCode = inputDialog.ResponseText;
+                if (string.IsNullOrEmpty(authorizationCode))
+                {
+                    DisplayInConsole("Authorization code is required.");
+                    return;
+                }
+                DisplayInConsole("Authorization code successfully entered.");
+            }
+            else
+            {
+                DisplayInConsole("Authorization code input was canceled.");
+            }
         }
 
         private class MappingInfo

@@ -1,0 +1,14 @@
+﻿<Window x:Class="Apollo.MnemonicSearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Mnemonic Search" Height="186" Width="400" Background="#FF4C4C4C">
+    <StackPanel Margin="10">
+        <TextBlock Text="Enter Mnemonic:" Foreground="White" Margin="0,0,0,10"/>
+        <TextBox x:Name="mnemonicInput" Width="300" Margin="0,0,0,10"/>
+        <Button Content="Search Mnemonic" Width="120" Height="30" 
+                HorizontalAlignment="Left" Click="SearchMnemonic_Click"/>
+        <TextBox x:Name="mnemonicResultTextBox" Margin="0,10,0,0" Background="#FF292727" 
+                 Foreground="White" VerticalScrollBarVisibility="Auto" 
+                 TextWrapping="Wrap" IsReadOnly="True"/>
+    </StackPanel>
+</Window>

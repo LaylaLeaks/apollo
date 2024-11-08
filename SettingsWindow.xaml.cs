@@ -27,5 +27,7 @@ namespace Apollo
         // LANG SELECT
         // OUTPUT CHANGE
         // NAME CHANGE
+
+        // coming maybe in v2.0 ~2025
     }
 }

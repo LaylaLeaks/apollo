@@ -12,12 +12,13 @@
             <Menu Margin="5" Background="{x:Null}">
                 <MenuItem Header="Others" Height="29" FontSize="15" Width="61" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White">
                     <MenuItem Header="Map" Click="Others_Map_Click" Background="#FF4C4C4C" Foreground="White" BorderBrush="#FF4C4C4C"/>
+                    <MenuItem Header="Auth-Code" Click="Others_AuthCode_Click" Background="#FF4C4C4C" Foreground="White" BorderBrush="#FF4C4C4C"/>
                 </MenuItem>
             </Menu>
             <Button Content="Settings" Click="Settings_Click" FontSize="15" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="white"/>
             <Menu Margin="5" Background="{x:Null}">
                 <MenuItem Header="Help" Height="29" FontSize="15" Width="52" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White">
-                    <MenuItem Header="Apollo" Click="Help_Apollo_Click" Background="#FF4C4C4C" Foreground="White" BorderBrush="#FF4C4C4C"/>
+                    <MenuItem Header="Roadmap" Click="Help_Apollo_Click" Background="#FF4C4C4C" Foreground="White" BorderBrush="#FF4C4C4C"/>
                     <MenuItem Header="Discord" Click="Help_Discord_Click" Background="#FF4C4C4C" Foreground="White" BorderBrush="#FF4C4C4C"/>
                 </MenuItem>
             </Menu>
@@ -30,18 +31,20 @@
             </Grid.ColumnDefinitions>
 
             <!-- Buttons Section -->
-            <StackPanel Grid.Column="0" VerticalAlignment="Top" Height="157">
+            <StackPanel Grid.Column="0" VerticalAlignment="Top" Height="188">
                 <Button Content="Currently Mappings" Margin="5" Click="Mappings_Click"/>
                 <Button Content="All currently AesKeys" Margin="5" Click="AesKey_Click"/>
                 <Button Content="Cosmetics (New)" Margin="5" Click="NewCosmetics_Click"/>
                 <Button Content="Cosmetics (All)" Margin="5" Click="AllCosmetics_Click"/>
                 <Button Content="Currently Shop Sections" Margin="5" Click="shopSections_Click"/>
+                <Button Content="Mnemonic search" Margin="5" Click="mnemonic_Click"/>
             </StackPanel>
 
             <!-- Console Section -->
             <TextBox x:Name="consoleTextBox" Grid.Column="1" Background="#FF292727" Foreground="White" 
                      VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" 
                      AcceptsReturn="True" IsReadOnly="True" Margin="5"/>
+
         </Grid>
     </DockPanel>
 </Window>
